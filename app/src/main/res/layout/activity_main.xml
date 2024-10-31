@@ -8,36 +8,36 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecetas"
+        android:id="@+id/rvRecipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/etNuevaReceta"
+        app:layout_constraintBottom_toTopOf="@+id/etAddRecipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etNuevaReceta"
+        android:id="@+id/etAddRecipe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Introduce Nueva receta"
+        android:hint="@string/add_new_recipe"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNuevaReceta"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddRecipe"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnNuevaReceta"
+        android:id="@+id/btnAddRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Añadir"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnBorrarTodo" />
+        app:layout_constraintEnd_toStartOf="@+id/btnDeleteAll" />
 
     <Button
-        android:id="@+id/btnBorrarTodo"
+        android:id="@+id/btnDeleteAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Borrar Todo"
+        android:text="@string/delete_all"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
