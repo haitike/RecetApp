@@ -17,12 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btnDeleteRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/delete_recipe"
-        android:src="@drawable/icon_delete"
+        android:text="X"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

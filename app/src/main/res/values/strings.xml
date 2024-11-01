@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Recetario</string>
-    <string name="add_new_recipe">Introduce Nueva receta</string>
-    <string name="add">Añadir</string>
-    <string name="delete_all">Borrar Todo</string>
     <string name="example">Ejemplo</string>
     <string name="delete_recipe">Delete Recipe</string>
+    <string name="remove_all_recipes">Remove all recipes</string>
+    <string name="clean_weekly_planner">Clean Weekly Planner</string>
 </resources>
