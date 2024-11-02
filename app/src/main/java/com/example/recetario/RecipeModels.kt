@@ -1,5 +1,7 @@
 package com.example.recetario
 
+var recipeList: MutableList<Recipe> = mutableListOf()
+
 enum class UnitOfMeasurement(val displayName: String) {
     UNITS("units"),
     MILLILITERS("ml."),
@@ -8,7 +10,7 @@ enum class UnitOfMeasurement(val displayName: String) {
 
 data class Ingredient(
     val name: String,
-    val quantity: Double,
+    val quantity: Int,
     val unit: UnitOfMeasurement
 )
 

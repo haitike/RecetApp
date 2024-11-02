@@ -5,6 +5,23 @@
     <string name="remove_all_recipes">Borrar todas las recetas</string>
     <string name="clean_weekly_planner">Limpiar el planificador</string>
     <string name="view_recipe">Ver receta</string>
-    <string name="cal_per_serving"> ● %1$s Cal por ración</string>
-    <string name="servings">Raciones: %1$s</string>
+    <string name="amount_cal_per_serving"> ● %1$s Cal por ración</string>
+    <string name="servings_amount">Raciones: %1$s</string>
+    <string name="title">Título</string>
+    <string name="servings">Raciones</string>
+    <string name="cal_per_serving">Calorías por ración</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="new_ingredient">Nuevo ingrediente</string>
+    <string name="units">unidades</string>
+    <string name="new_instruction">Nueva Instrucción</string>
+
+    <string name="new_instruction_verbose">Escribe una nueva instrucción para tu receta</string>
+
+    <string-array name="units_choices">
+        <item>unidades</item>
+        <item>ml.</item>
+        <item>grams</item>
+    </string-array>
+
 </resources>

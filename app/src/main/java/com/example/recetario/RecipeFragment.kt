@@ -21,17 +21,27 @@ class RecipesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.recipe_manager, container, false)
 
+        recipeAdapter = RecipeAdapter()
+
         recyclerView = view.findViewById(R.id.rvRecipeList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        recipeAdapter = RecipeAdapter()
         recyclerView.adapter = recipeAdapter
 
         // Add some sample recipes
         val btnAddRecipe: Button = view.findViewById(R.id.btnAddRecipe)
         btnAddRecipe.setOnClickListener {
-            recipeAdapter.addRecipe(Recipe("Recipe", 4, 500, mutableListOf(), mutableListOf()))
+            showNewRecipeFragment()
         }
         return view
     }
+
+    private fun showNewRecipeFragment() {
+        val newRecipeFragment = NewRecipeFragment()
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_frame, newRecipeFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+
 }
