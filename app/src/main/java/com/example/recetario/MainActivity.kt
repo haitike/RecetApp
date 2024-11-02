@@ -37,27 +37,33 @@ class MainActivity : AppCompatActivity() {
         btnSettings.setOnClickListener {
             showSettingsFragment()
         }
+
+        showRecipesFragment()
     }
 
     private fun showRecipesFragment() {
+        fragmentTransaction = fragmentManager.beginTransaction() // Reset the fragmentTransaction object
         val fragment = RecipesFragment()
         fragmentTransaction.replace(R.id.main_frame, fragment)
         fragmentTransaction.commit()
     }
 
     private fun showPlannerFragment() {
+        fragmentTransaction = fragmentManager.beginTransaction() // Reset the fragmentTransaction object
         val fragment = PlannerFragment()
         fragmentTransaction.replace(R.id.main_frame, fragment)
         fragmentTransaction.commit()
     }
 
     private fun showShoppingListFragment() {
+        fragmentTransaction = fragmentManager.beginTransaction() // Reset the fragmentTransaction object
         val fragment = ShoppingListFragment()
         fragmentTransaction.replace(R.id.main_frame, fragment)
         fragmentTransaction.commit()
     }
 
     private fun showSettingsFragment() {
+        fragmentTransaction = fragmentManager.beginTransaction() // Reset the fragmentTransaction object
         val fragment = SettingsFragment()
         fragmentTransaction.replace(R.id.main_frame, fragment)
         fragmentTransaction.commit()
