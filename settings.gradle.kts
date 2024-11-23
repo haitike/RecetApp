@@ -20,4 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Recetario"
-include(":app")
+include(":RecetApp")

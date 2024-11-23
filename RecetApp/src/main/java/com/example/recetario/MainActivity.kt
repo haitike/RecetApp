@@ -8,12 +8,17 @@ import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var recipeDatabase: RecipeDatabase
+
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        recipeDatabase = RecipeDatabase(this)
 
         fragmentManager = supportFragmentManager
         fragmentTransaction = fragmentManager.beginTransaction()

@@ -1,12 +1,13 @@
 package com.example.recetario
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeAdapter(private val recipeDatabase: RecipeDatabase)   : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -21,7 +22,8 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val curRecipe = recipeList[position]
+        val curRecipe = recipeDatabase.getRecipe(position)
+
         holder.itemView.apply {
             val tvRecipeTitle = holder.itemView.findViewById<TextView>(R.id.tvRecipeTitle)
             val tvServings = holder.itemView.findViewById<TextView>(R.id.tvRecipeServings)
@@ -33,6 +35,6 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return recipeList.size
+        return recipeDatabase.getRecipeCount()
     }
 }

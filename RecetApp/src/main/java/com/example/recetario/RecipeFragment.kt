@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 class RecipesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeAdapter: RecipeAdapter
+    private lateinit var recipeDatabase: RecipeDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,10 +22,11 @@ class RecipesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.recipe_manager, container, false)
 
-        recipeAdapter = RecipeAdapter()
-
         recyclerView = view.findViewById(R.id.rvRecipeList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        recipeDatabase = (requireContext() as MainActivity).recipeDatabase
+        recipeAdapter = RecipeAdapter(recipeDatabase)
         recyclerView.adapter = recipeAdapter
 
         // Add some sample recipes

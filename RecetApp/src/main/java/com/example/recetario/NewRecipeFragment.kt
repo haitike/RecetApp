@@ -16,6 +16,8 @@ class NewRecipeFragment : Fragment() {
     private lateinit var recyclerViewIngredients: RecyclerView
     private lateinit var recyclerViewInstructions: RecyclerView
 
+    private lateinit var recipeDatabase: RecipeDatabase
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +26,8 @@ class NewRecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.recipe_new, container, false)
+
+        recipeDatabase = (requireContext() as MainActivity).recipeDatabase
 
         newIngredientsAdapter = NewIngredientsAdapter()
         newInstructionAdapter = NewInstructionAdapter()
@@ -52,7 +56,7 @@ class NewRecipeFragment : Fragment() {
                 val servings = if (recipeServings.isEmpty()) 1 else recipeServings.toInt()
                 val calories = if (recipeCalories.isEmpty()) 0 else recipeCalories.toInt()
 
-                recipeList.add(Recipe(recipeTitle, servings, calories, mutableListOf(), mutableListOf()))
+                recipeDatabase.insertRecipe(Recipe(name = recipeTitle, servings = servings, calories = calories, context = requireContext()))
 
                 activity?.onBackPressed()
             }

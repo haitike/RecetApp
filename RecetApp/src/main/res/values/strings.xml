@@ -17,6 +17,7 @@
     <string name="new_instruction">Nueva Instrucción</string>
 
     <string name="new_instruction_verbose">Escribe una nueva instrucción para tu receta</string>
+    <string name="recipes_">Recetas:</string>
 
     <string-array name="units_choices">
         <item>unidades</item>
