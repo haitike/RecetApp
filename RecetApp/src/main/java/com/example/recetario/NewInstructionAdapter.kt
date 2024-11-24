@@ -3,6 +3,7 @@ package com.example.recetario
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -31,6 +32,12 @@ class NewInstructionAdapter : RecyclerView.Adapter<NewInstructionAdapter.RecipeV
         holder.itemView.apply {
             val etNewInstruction = holder.itemView.findViewById<TextView>(R.id.etNewInstruction)
             etNewInstruction.hint = holder.itemView.context.getString(R.string.new_instruction_verbose)
+
+            val btnDeleteNewIngredient = holder.itemView.findViewById<Button>(R.id.btnDeleteNewInstruction)
+            btnDeleteNewIngredient.setOnClickListener {
+                notifyItemRemoved(position)
+                instructionAmount--
+            }
         }
     }
 

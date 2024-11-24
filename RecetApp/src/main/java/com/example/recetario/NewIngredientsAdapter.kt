@@ -3,6 +3,7 @@ package com.example.recetario
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -36,10 +37,20 @@ class NewIngredientsAdapter : RecyclerView.Adapter<NewIngredientsAdapter.RecipeV
             etNewRecipeIngredientTitle.text = holder.itemView.context.getString(R.string.ingredient)
             etNewRecipeIngredientAmount.text = "1"
             spinnerNewIngredientUnit.setSelection(0)
+
+            val btnDeleteNewIngredient = holder.itemView.findViewById<Button>(R.id.btnDeleteNewIngredient)
+            btnDeleteNewIngredient.setOnClickListener {
+                notifyItemRemoved(position)
+                ingredientAmount--
+            }
+
+
         }
     }
 
     override fun getItemCount(): Int {
         return this.ingredientAmount
     }
+
+
 }
