@@ -66,7 +66,7 @@ class NewRecipeFragment : Fragment() {
                     val ingredientTitle = viewIngredient.findViewById<EditText>(R.id.etNewRecipeIngredientTitle).text.toString()
                     val ingredientQuantity = viewIngredient.findViewById<EditText>(R.id.etNewRecipeIngredientAmount).text.toString().toIntOrNull() ?: 0
                     val ingredientUnitPosition = viewIngredient.findViewById<Spinner>(R.id.spinnerNewIngredientUnit).selectedItemPosition
-                    val newIngredient = Ingredient(name = ingredientTitle, quantity = ingredientQuantity, unit = UnitOfMeasurement.entries[ingredientUnitPosition])
+                    val newIngredient = Ingredient(name = ingredientTitle, quantity = ingredientQuantity, unit = ingredientUnitPosition)
                     recipeDatabase.insertIngredient(newIngredient, recipeId)
                 }
 

@@ -10,7 +10,7 @@ class RecipeDatabase(private val context: Context) {
 
     private var db: SQLiteDatabase? = null
 
-    fun openDatabase(): SQLiteDatabase {
+    private fun openDatabase(): SQLiteDatabase {
         db = context.openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null)
         createTables()
         return db!!
@@ -136,7 +136,7 @@ class RecipeDatabase(private val context: Context) {
             put("recipeId", recipeId)
             put("name", ingredient.name)
             put("quantity", ingredient.quantity.toString())
-            put("unit", ingredient.unit.displayNameResId)
+            put("unit", ingredient.unit)
         }
         db.insert("ingredients", null, contentValues)
         db.close()
@@ -150,6 +150,44 @@ class RecipeDatabase(private val context: Context) {
         }
         db.insert("instructions", null, contentValues)
         db.close()
+    }
+
+    fun getIngredientsByRecipeId(recipeId: Int): List<Ingredient> {
+        val db = openDatabase()
+        val cursor = db.query("ingredients", null, "recipeId = ?", arrayOf(recipeId.toString()), null, null, null)
+        val ingredients = mutableListOf<Ingredient>()
+        while (cursor.moveToNext()) {
+            val nameIndex = cursor.getColumnIndex("name")
+            val quantityIndex = cursor.getColumnIndex("quantity")
+            val unitIndex = cursor.getColumnIndex("unit")
+            if (nameIndex == -1 || quantityIndex == -1 || unitIndex == -1) {
+                throw RuntimeException("Invalid column index")
+            }
+            val name = cursor.getString(nameIndex)
+            val quantity = cursor.getInt(quantityIndex)
+            val unit = cursor.getInt(unitIndex)
+            ingredients.add(Ingredient(name=name, quantity =quantity, unit = unit))
+        }
+        cursor.close()
+        db.close()
+        return ingredients
+    }
+
+    fun getInstructionsByRecipeId(recipeId: Int): List<Instruction> {
+        val db = openDatabase()
+        val cursor = db.query("instructions", null, "recipeId = ?", arrayOf(recipeId.toString()), null, null, null)
+        val instructions = mutableListOf<Instruction>()
+        while (cursor.moveToNext()) {
+            val instructionIndex = cursor.getColumnIndex("instruction")
+            if (instructionIndex == -1) {
+                throw RuntimeException("Invalid column index")
+            }
+            val instruction = cursor.getString(instructionIndex)
+            instructions.add(Instruction(instruction = instruction))
+        }
+        cursor.close()
+        db.close()
+        return instructions
     }
 
 }

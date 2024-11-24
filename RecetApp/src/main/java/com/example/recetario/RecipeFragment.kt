@@ -26,10 +26,10 @@ class RecipesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         recipeDatabase = (requireContext() as MainActivity).recipeDatabase
-        recipeAdapter = RecipeAdapter(recipeDatabase)
+        recipeAdapter = RecipeAdapter(recipeDatabase, parentFragmentManager)
         recyclerView.adapter = recipeAdapter
 
-        // Add some sample recipes
+        // Add a new recipe
         val btnAddRecipe: Button = view.findViewById(R.id.btnAddRecipe)
         btnAddRecipe.setOnClickListener {
             showNewRecipeFragment()
