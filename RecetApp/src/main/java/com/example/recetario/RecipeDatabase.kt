@@ -131,7 +131,7 @@ class RecipeDatabase(private val context: Context) {
     }
 
     fun insertIngredient(ingredient: Ingredient, recipeId: Int) {
-    val db = openDatabase()
+        val db = openDatabase()
         val contentValues = ContentValues().apply {
             put("recipeId", recipeId)
             put("name", ingredient.name)
@@ -139,6 +139,16 @@ class RecipeDatabase(private val context: Context) {
             put("unit", ingredient.unit.displayNameResId)
         }
         db.insert("ingredients", null, contentValues)
+        db.close()
+    }
+
+    fun insertInstruction(instructionText: String, recipeId: Int) {
+        val db = openDatabase()
+        val contentValues = ContentValues().apply {
+            put("recipeId", recipeId)
+            put("instruction", instructionText)
+        }
+        db.insert("instructions", null, contentValues)
         db.close()
     }
 

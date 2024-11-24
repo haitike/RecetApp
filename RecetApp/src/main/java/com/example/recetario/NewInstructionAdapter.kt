@@ -10,7 +10,7 @@ class NewInstructionAdapter : RecyclerView.Adapter<NewInstructionAdapter.RecipeV
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    var instructionList: MutableList<String> = mutableListOf()
+    private var instructionAmount: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         return RecipeViewHolder(
@@ -23,20 +23,18 @@ class NewInstructionAdapter : RecyclerView.Adapter<NewInstructionAdapter.RecipeV
     }
 
     fun addExtraInstruction() {
-        instructionList.add("@string/new_instruction_verbose")
-        notifyItemInserted(instructionList.size - 1)
-
+        this.instructionAmount++
+        notifyItemInserted(instructionAmount)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val curInstruction = instructionList[position]
         holder.itemView.apply {
             val etNewInstruction = holder.itemView.findViewById<TextView>(R.id.etNewInstruction)
-            etNewInstruction.text = curInstruction
+            etNewInstruction.hint = holder.itemView.context.getString(R.string.new_instruction_verbose)
         }
     }
 
     override fun getItemCount(): Int {
-        return instructionList.size
+        return this.instructionAmount
     }
 }

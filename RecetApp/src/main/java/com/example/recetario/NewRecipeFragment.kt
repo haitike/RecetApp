@@ -70,6 +70,15 @@ class NewRecipeFragment : Fragment() {
                     recipeDatabase.insertIngredient(newIngredient, recipeId)
                 }
 
+                // Instruction Operations
+                for (i in 0 until newInstructionAdapter.itemCount) {
+                    val viewIngredient = recyclerViewInstructions.getChildAt(i)
+
+                    val instruction_text = viewIngredient.findViewById<EditText>(R.id.etNewInstruction).text.toString()
+                    recipeDatabase.insertInstruction(instruction_text, recipeId)
+                }
+
+
                 activity?.onBackPressed()
             }
         }

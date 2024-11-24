@@ -12,6 +12,7 @@ class NewIngredientsAdapter : RecyclerView.Adapter<NewIngredientsAdapter.RecipeV
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private var ingredientAmount: Int = 0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         return RecipeViewHolder(
             LayoutInflater.from(parent.context).inflate(
