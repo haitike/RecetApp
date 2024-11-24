@@ -15,14 +15,15 @@
     <string name="new_ingredient">Nuevo ingrediente</string>
     <string name="units">unidades</string>
     <string name="new_instruction">Nueva Instrucción</string>
-
+    <string name="ingredient">Ingrediente</string>
     <string name="new_instruction_verbose">Escribe una nueva instrucción para tu receta</string>
     <string name="recipes_">Recetas:</string>
 
     <string-array name="units_choices">
         <item>unidades</item>
         <item>ml.</item>
-        <item>grams</item>
+        <item>gramos</item>
+        <item>cucharadas</item>
     </string-array>
 
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +57,18 @@ class NewRecipeFragment : Fragment() {
                 val servings = if (recipeServings.isEmpty()) 1 else recipeServings.toInt()
                 val calories = if (recipeCalories.isEmpty()) 0 else recipeCalories.toInt()
 
-                recipeDatabase.insertRecipe(Recipe(name = recipeTitle, servings = servings, calories = calories, context = requireContext()))
+                val recipeId = recipeDatabase.insertRecipe(recipeTitle, servings, calories)
+
+                // Ingredient Operations
+                for (i in 0 until newIngredientsAdapter.itemCount) {
+                    val viewIngredient = recyclerViewIngredients.getChildAt(i)
+
+                    val ingredientTitle = viewIngredient.findViewById<EditText>(R.id.etNewRecipeIngredientTitle).text.toString()
+                    val ingredientQuantity = viewIngredient.findViewById<EditText>(R.id.etNewRecipeIngredientAmount).text.toString().toIntOrNull() ?: 0
+                    val ingredientUnitPosition = viewIngredient.findViewById<Spinner>(R.id.spinnerNewIngredientUnit).selectedItemPosition
+                    val newIngredient = Ingredient(name = ingredientTitle, quantity = ingredientQuantity, unit = UnitOfMeasurement.entries[ingredientUnitPosition])
+                    recipeDatabase.insertIngredient(newIngredient, recipeId)
+                }
 
                 activity?.onBackPressed()
             }

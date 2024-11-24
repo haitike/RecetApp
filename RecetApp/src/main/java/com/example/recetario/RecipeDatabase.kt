@@ -22,56 +22,77 @@ class RecipeDatabase(private val context: Context) {
                 append("CREATE TABLE if not exists recipes ")
                 append("(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, servings INTEGER, calories INTEGER)")
             }
+
         val CREATE_INGREDIENTS_TABLE =
             buildString {
                 append("CREATE TABLE if not exists ingredients ")
-                append("(id INTEGER PRIMARY KEY AUTOINCREMENT, recipeId INTEGER, name TEXT, quantity TEXT, unit TEXT)")
+                append("(id INTEGER PRIMARY KEY AUTOINCREMENT, ")
+                append("recipeId INTEGER, ")
+                append("name TEXT, ")
+                append("quantity INTEGER, ")
+                append("unit INTEGER, ")
+                append("FOREIGN KEY (recipeId) REFERENCES recipes (id))")
             }
+
         val CREATE_INSTRUCTIONS_TABLE =
             buildString {
                 append("CREATE TABLE if not exists instructions ")
-                append("(id INTEGER PRIMARY KEY AUTOINCREMENT, recipeId INTEGER, instruction TEXT)")
+                append("(id INTEGER PRIMARY KEY AUTOINCREMENT, ")
+                append("recipeId INTEGER, ")
+                append("instruction TEXT, ")
+                append("FOREIGN KEY (recipeId) REFERENCES recipes (id))")
             }
 
-        db?.execSQL(CREATE_RECIPES_TABLE)
-        db?.execSQL(CREATE_INGREDIENTS_TABLE)
-        db?.execSQL(CREATE_INSTRUCTIONS_TABLE)
-    }
 
-    fun close() {
+        val CREATE_RECIPE_DAYS_TABLE =
+            buildString {
+                append("CREATE TABLE if not exists recipe_days ")
+                append("(recipeId INTEGER, dayId INTEGER, ")
+                append("PRIMARY KEY (recipeId, dayId), ")
+                append("FOREIGN KEY (recipeId) REFERENCES recipes (id), ")
+                append("CHECK (dayId BETWEEN 0 AND 6))")
+            }
+
+
         try {
-            db?.close()
+            db?.execSQL(CREATE_RECIPES_TABLE)
+            db?.execSQL(CREATE_INGREDIENTS_TABLE)
+            db?.execSQL(CREATE_INSTRUCTIONS_TABLE)
+            db?.execSQL(CREATE_RECIPE_DAYS_TABLE)
         } catch (e: Exception) {
             // Log the exception or handle it in some other way
-            Log.e("RecipeDatabase", "Error closing database connection", e)
-        } finally {
-            db = null
+            Log.e("RecipeDatabase", "Error creating tables", e)
         }
     }
 
-    fun insertRecipe(recipe: Recipe) {
+    fun insertRecipe(name : String, servings : Int, calories : Int): Int {
         val db = openDatabase()
         val contentValues = ContentValues().apply {
-            put("name", recipe.name)
-            put("servings", recipe.servings)
-            put("calories", recipe.calories)
+            put("name", name)
+            put("servings", servings)
+            put("calories", calories)
         }
-        db.insert("recipes", null, contentValues)
+        val id  = db.insert("recipes", null, contentValues)
+        db.close()
+        return id.toInt()
     }
 
-    fun updateRecipe(recipe: Recipe) {
+    fun updateRecipe(id: Int, name: String, servings: Int, calories: Int) {
         val db = openDatabase()
         val contentValues = ContentValues().apply {
-            put("name", recipe.name)
-            put("servings", recipe.servings)
-            put("calories", recipe.calories)
+            put("name", name)
+            put("servings", servings)
+            put("calories", calories)
         }
-        db.update("recipes", contentValues, "id = ?", arrayOf(recipe.id.toString()))
+        db.update("recipes", contentValues, "id = ?", arrayOf(id.toString()))
+        db.close()
 
     }
 
     fun deleteRecipe(recipe: Recipe) {
-        db?.delete("recipes", "id = ?", arrayOf(recipe.id.toString()))
+        val db = openDatabase()
+        db.delete("recipes", "id = ?", arrayOf(recipe.id.toString()))
+        db.close()
     }
 
     fun getRecipe(position: Int): Recipe {
@@ -93,7 +114,6 @@ class RecipeDatabase(private val context: Context) {
             cursor.getString(nameIndex),
             cursor.getInt(servingsIndex),
             cursor.getInt(caloriesIndex),
-            context = context
         )
         cursor.close()
         db.close()
@@ -110,5 +130,16 @@ class RecipeDatabase(private val context: Context) {
 
     }
 
+    fun insertIngredient(ingredient: Ingredient, recipeId: Int) {
+    val db = openDatabase()
+        val contentValues = ContentValues().apply {
+            put("recipeId", recipeId)
+            put("name", ingredient.name)
+            put("quantity", ingredient.quantity.toString())
+            put("unit", ingredient.unit.displayNameResId)
+        }
+        db.insert("ingredients", null, contentValues)
+        db.close()
+    }
 
 }

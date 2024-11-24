@@ -11,8 +11,7 @@ class NewIngredientsAdapter : RecyclerView.Adapter<NewIngredientsAdapter.RecipeV
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    var ingredientList: MutableList<Ingredient> = mutableListOf()
-
+    private var ingredientAmount: Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         return RecipeViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -23,26 +22,23 @@ class NewIngredientsAdapter : RecyclerView.Adapter<NewIngredientsAdapter.RecipeV
         )
     }
 
-
-
     fun addExtraIngredient() {
-        ingredientList.add(Ingredient("Ingredient", 1, UnitOfMeasurement.UNITS))
-        notifyItemInserted(ingredientList.size - 1)
+        this.ingredientAmount++
+        notifyItemInserted(ingredientAmount)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val curIngredient = ingredientList[position]
         holder.itemView.apply {
             val etNewRecipeIngredientTitle = holder.itemView.findViewById<TextView>(R.id.etNewRecipeIngredientTitle)
             val etNewRecipeIngredientAmount = holder.itemView.findViewById<TextView>(R.id.etNewRecipeIngredientAmount)
             val spinnerNewIngredientUnit = holder.itemView.findViewById<Spinner>(R.id.spinnerNewIngredientUnit)
-            etNewRecipeIngredientTitle.text = curIngredient.name
-            etNewRecipeIngredientAmount.text = curIngredient.quantity.toString()
-            spinnerNewIngredientUnit.setSelection(curIngredient.unit.ordinal)
+            etNewRecipeIngredientTitle.text = holder.itemView.context.getString(R.string.ingredient)
+            etNewRecipeIngredientAmount.text = "1"
+            spinnerNewIngredientUnit.setSelection(0)
         }
     }
 
     override fun getItemCount(): Int {
-        return ingredientList.size
+        return this.ingredientAmount
     }
 }
