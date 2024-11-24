@@ -44,21 +44,35 @@ class RecipeDatabase(private val context: Context) {
             }
 
 
-        val CREATE_RECIPE_DAYS_TABLE =
+        val CREATE_DAYS_TABLE =
             buildString {
-                append("CREATE TABLE if not exists recipe_days ")
-                append("(recipeId INTEGER, dayId INTEGER, ")
-                append("PRIMARY KEY (recipeId, dayId), ")
-                append("FOREIGN KEY (recipeId) REFERENCES recipes (id), ")
-                append("CHECK (dayId BETWEEN 0 AND 6))")
+                append("CREATE TABLE if not exists days ")
+                append("(id INTEGER PRIMARY KEY, ")
+                append("recipeId1 INTEGER, ")
+                append("recipeId2 INTEGER, ")
+                append("recipeId3 INTEGER, ")
+                append("FOREIGN KEY (recipeId1) REFERENCES recipes (id), ")
+                append("FOREIGN KEY (recipeId2) REFERENCES recipes (id), ")
+                append("FOREIGN KEY (recipeId3) REFERENCES recipes (id))")
             }
 
+        val INSERT_DAYS = buildString {
+            append("INSERT OR IGNORE INTO days (id, recipeId1, recipeId2, recipeId3) VALUES ")
+            append("(0, NULL, NULL, NULL), ")
+            append("(1, NULL, NULL, NULL), ")
+            append("(2, NULL, NULL, NULL), ")
+            append("(3, NULL, NULL, NULL), ")
+            append("(4, NULL, NULL, NULL), ")
+            append("(5, NULL, NULL, NULL), ")
+            append("(6, NULL, NULL, NULL)")
+        }
 
         try {
             db?.execSQL(CREATE_RECIPES_TABLE)
             db?.execSQL(CREATE_INGREDIENTS_TABLE)
             db?.execSQL(CREATE_INSTRUCTIONS_TABLE)
-            db?.execSQL(CREATE_RECIPE_DAYS_TABLE)
+            db?.execSQL(CREATE_DAYS_TABLE)
+            db?.execSQL(INSERT_DAYS)
         } catch (e: Exception) {
             // Log the exception or handle it in some other way
             Log.e("RecipeDatabase", "Error creating tables", e)
@@ -128,6 +142,20 @@ class RecipeDatabase(private val context: Context) {
         db.close()
         return count
 
+    }
+
+    fun getRecipeList(): List<String> {
+        val db = openDatabase()
+        val cursor = db.query("recipes", arrayOf("name"), null, null, null, null, null)
+        val recipes = mutableListOf<String>()
+        if (cursor != null)
+            while (cursor.moveToNext()) {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+                recipes.add(name)
+            }
+        cursor.close()
+        db.close()
+        return recipes
     }
 
     fun insertIngredient(ingredient: Ingredient, recipeId: Int) {

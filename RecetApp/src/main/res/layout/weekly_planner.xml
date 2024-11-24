@@ -1,12 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWeeklyPlanner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvMonday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:text="@string/monday" />
+
+            <Spinner
+                android:id="@+id/spinnerMonday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerMonday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerMonday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tvTuesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:text="@string/tuesday" />
+
+            <Spinner
+                android:id="@+id/spinnerTuesday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerTuesday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerTuesday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tvWednesday"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wednesday" />
+
+            <Spinner
+                android:id="@+id/spinnerWednesday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerWednesday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerWednesday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tvThursday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:text="@string/thursday" />
+
+            <Spinner
+                android:id="@+id/spinnerThursday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerThursday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerThursday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tvFriday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:text="@string/friday" />
+
+            <Spinner
+                android:id="@+id/spinnerFriday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerFriday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerFriday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tvSaturday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:text="@string/saturday" />
+
+            <Spinner
+                android:id="@+id/spinnerSaturday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerSaturday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerSaturday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tvSunday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:textAlignment="center"
+                android:text="@string/sunday" />
+
+            <Spinner
+                android:id="@+id/spinnerSunday1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerSunday2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <Spinner
+                android:id="@+id/spinnerSunday3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

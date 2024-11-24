@@ -18,6 +18,13 @@
     <string name="ingredient">Ingrediente</string>
     <string name="new_instruction_verbose">Escribe una nueva instrucción para tu receta</string>
     <string name="recipes_">Recetas:</string>
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miércoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
 
     <string-array name="units_choices">
         <item>unidades</item>
